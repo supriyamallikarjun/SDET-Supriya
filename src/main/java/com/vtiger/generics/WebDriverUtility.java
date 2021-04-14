@@ -1,5 +1,6 @@
 package com.vtiger.generics;
 
+import java.util.Iterator;
 import java.util.Set;
 import java.util.concurrent.TimeUnit;
 import org.openqa.selenium.WebDriver;
@@ -47,16 +48,17 @@ public class WebDriverUtility {
 	public void maximize(WebDriver driver) {
 		driver.manage().window().maximize();
 	}
-	public void getWindows(WebDriver driver,String title ) {
-		
+	public void getWindows(WebDriver driver) {
+
 		Set<String> wnds = driver.getWindowHandles();
-		for (String str : wnds) {
-			if((str.equals(title))) {
-				driver.switchTo().window(str);
-			}
+		Iterator<String> it = wnds.iterator();
+		while(it.hasNext()) {
+			String wnd = it.next();	
+			driver.switchTo().window(wnd);
 		}
 	}
 }
+
 
 
 

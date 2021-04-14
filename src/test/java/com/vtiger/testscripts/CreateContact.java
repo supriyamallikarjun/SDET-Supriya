@@ -50,23 +50,18 @@ public class CreateContact {
 		driver.findElement(By.name("lastname")).sendKeys(LastName);
 		driver.findElement(By.xpath("(//img[@alt='Select'])[1]")).click();
 		 
-		String title = driver.getTitle();
-		System.out.println(title);
-		wu.getWindows(driver, title);
-		/*String pwnd = driver.getWindowHandle();
-		Set<String> cwnd = driver.getWindowHandles();
-		for (String string : cwnd) {
-			if(!(string.equals(pwnd))) {
-			driver.switchTo().window(string);
-			}
-		}*/
-		/*String name = fu.getExceldata("CreateContact", 1, 0);
-		driver.findElement(By.id("search_txt")).sendKeys("PY_Product");
+		//String title = driver.getTitle();
+		
+		wu.getWindows(driver);
+		String Orgname = fu.getExceldata("CreateContact", 1, 2);
+		driver.findElement(By.id("search_txt")).sendKeys(Orgname);
 		driver.findElement(By.xpath("//input[@name='search']")).click();
-		driver.findElement(By.xpath("//a[.='PY_Product']")).click();
-		//driver.switchTo().window(pwnd);
-		driver.findElement(By.xpath("//input[@id='mobile']")).sendKeys("123456");
-		driver.findElement(By.xpath("(//input[@title='Save [Alt+S]'])[1]")).click();*/
+		driver.findElement(By.xpath("//a[.='"+Orgname+"']")).click();
+		wu.getWindows(driver);
+		
+		String MobileNo = fu.getExceldata("CreateContact", 1, 3);
+		driver.findElement(By.xpath("//input[@id='mobile']")).sendKeys(MobileNo);
+		driver.findElement(By.xpath("(//input[@title='Save [Alt+S]'])[1]")).click();
 		driver.quit();
 	}
 }
