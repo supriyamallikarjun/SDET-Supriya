@@ -15,21 +15,26 @@ public class WebDriverUtility {
 		Select select = new Select(ele);
 		select.selectByValue(value);		
 	}
+	
 	public void selectTheElement(String text, WebElement ele ) {
 		Select select = new Select(ele);
 		select.selectByValue(text);		
 	}
+	
 	public void selectTheElement(WebElement ele, int index ) {
 		Select select = new Select(ele);
 		select.selectByIndex(index);		
 	}
+	
 	public void implicitWait(WebDriver driver) {
 		driver.manage().timeouts().implicitlyWait(IConstant.implicitWaitTime, TimeUnit.SECONDS);
 	}
+	
 	public void explicitWait(WebDriver driver,WebElement element) {
 		WebDriverWait wait = new WebDriverWait(driver, IConstant.explictWaitTime);
 		wait.until(ExpectedConditions.elementToBeClickable(element));
 	}
+	
 	public void elementToBeClickable(WebElement element) {
 		int count=0;
 		while(count<40) {
@@ -42,19 +47,33 @@ public class WebDriverUtility {
 			}
 		}
 	}
+	
 	public void refresh(WebDriver driver) {
 		driver.navigate().refresh();
 	}
+	
 	public void maximize(WebDriver driver) {
 		driver.manage().window().maximize();
 	}
+	
 	public void getWindows(WebDriver driver) {
-
 		Set<String> wnds = driver.getWindowHandles();
 		Iterator<String> it = wnds.iterator();
 		while(it.hasNext()) {
 			String wnd = it.next();	
 			driver.switchTo().window(wnd);
+		}
+	}
+	
+	public void getExpWindows(WebDriver driver, String expWindTitle) {
+		Set<String> wnds = driver.getWindowHandles();
+		Iterator<String> it = wnds.iterator();
+		while(it.hasNext()) {
+			String wnd = it.next();	
+			driver.switchTo().window(wnd);
+			if(wnd.contains(expWindTitle)) {
+				break;
+			}
 		}
 	}
 }
